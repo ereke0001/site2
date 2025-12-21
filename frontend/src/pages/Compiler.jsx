@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import apiClient from '../config/api';
 
 const Compiler = () => {
   const [code, setCode] = useState('# Напишите ваш код здесь\nprint("Привет, мир!")');
@@ -13,7 +13,7 @@ const Compiler = () => {
       setError('');
       setOutput('');
       
-      const response = await axios.post('/api/compiler/execute', { code });
+      const response = await apiClient.post('/api/compiler/execute', { code });
       
       if (response.data.success) {
         setOutput(response.data.output);

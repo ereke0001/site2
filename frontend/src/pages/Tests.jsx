@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../config/api';
 
 const Tests = () => {
   const [tests, setTests] = useState([]);
@@ -13,7 +13,7 @@ const Tests = () => {
 
   const fetchTests = async () => {
     try {
-      const response = await axios.get('/api/tests');
+      const response = await apiClient.get('/api/tests');
       setTests(response.data.tests);
     } catch (err) {
       setError(err.response?.data?.message || 'Не удалось загрузить тесты');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../config/api';
 
 const TestDetail = () => {
   const { id } = useParams();
@@ -18,7 +18,7 @@ const TestDetail = () => {
 
   const fetchTest = async () => {
     try {
-      const response = await axios.get(`/api/tests/${id}`);
+      const response = await apiClient.get(`/api/tests/${id}`);
       setTest(response.data.test);
       // Initialize answers array
       setAnswers(new Array(response.data.test.questions?.length || 0).fill(null));
@@ -51,7 +51,7 @@ const TestDetail = () => {
     }
     
     try {
-      const response = await axios.post(`/api/tests/${id}/submit`, {
+      const response = await apiClient.post(`/api/tests/${id}/submit`, {
         name: studentName.trim(),
         answers
       });

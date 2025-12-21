@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../config/api';
 
 const Lectures = () => {
   const [lectures, setLectures] = useState([]);
@@ -13,7 +13,7 @@ const Lectures = () => {
 
   const fetchLectures = async () => {
     try {
-      const response = await axios.get('/api/lectures');
+      const response = await apiClient.get('/api/lectures');
       setLectures(response.data.lectures);
     } catch (err) {
       setError(err.response?.data?.message || 'Не удалось загрузить лекции');
